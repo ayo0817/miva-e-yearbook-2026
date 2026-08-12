@@ -189,7 +189,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             <span className="font-semibold text-slate-900">Miva Open University</span>
           </div>
           <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} Miva Digital Yearbook. All rights reserved.
+            © {new Date().getFullYear()} Miva Digital Yearbook. Made by me Ayomide Adeagbo and my email ayo2adeagbo@gmail.com.
           </p>
         </div>
       </footer>
