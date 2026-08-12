@@ -71,7 +71,7 @@ export default function Directory() {
             className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
-        <div className="flex gap-4 w-full md:w-auto">
+        <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
           <select 
             value={filterYear}
             onChange={(e) => setFilterYear(e.target.value)}

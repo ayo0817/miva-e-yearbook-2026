@@ -211,9 +211,8 @@ export default function Profile() {
               <div className="absolute inset-0 flex flex-col items-center justify-between p-8 text-center z-10 border-8 border-white">
                 
                 <div className="w-full flex justify-center pt-2">
-                  <div className="flex items-center gap-2">
-                    <GraduationCap className="h-8 w-8 text-blue-800" />
-                    <span className="font-bold text-lg text-blue-900 uppercase tracking-widest">Miva Open University</span>
+                  <div className="flex items-center">
+                    <img src="https://miva-university.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/05/22180831/Miva-Logo-Blue-Horizontal-1.png" alt="Miva Open University" className="h-10 object-contain" />
                   </div>
                 </div>
 

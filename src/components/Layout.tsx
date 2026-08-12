@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { GraduationCap, Users, Image as ImageIcon, MessageSquare, LogOut, LayoutDashboard, UserPlus, LogIn, Menu, X } from 'lucide-react';
+import { Users, Image as ImageIcon, MessageSquare, LogOut, LayoutDashboard, UserPlus, LogIn, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
@@ -27,11 +27,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="bg-blue-600 p-2 rounded-lg group-hover:bg-blue-700 transition-colors">
-                <GraduationCap className="h-6 w-6 text-yellow-400" />
-              </div>
-              <span className="font-bold text-xl tracking-tight text-blue-900">Miva Yearbook</span>
+            <Link to="/" className="flex items-center group">
+              <img src="https://miva-university.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/05/22180831/Miva-Logo-Blue-Horizontal-1.png" alt="Miva Open University" className="h-10 object-contain" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -188,7 +185,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <footer className="bg-white border-t border-slate-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <GraduationCap className="h-5 w-5 text-blue-600" />
+            <img src="https://miva-university.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/05/22180831/Miva-Logo-Blue-Horizontal-1.png" alt="Miva Open University" className="h-6 object-contain" />
             <span className="font-semibold text-slate-900">Miva Open University</span>
           </div>
           <p className="text-slate-500 text-sm">

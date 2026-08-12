@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { GraduationCap, ArrowRight, Image as ImageIcon, Users, Award } from 'lucide-react';
+import { ArrowRight, Image as ImageIcon, Users, Award } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="inline-flex items-center justify-center p-3 bg-white/10 backdrop-blur-md rounded-2xl mb-4 border border-white/20 shadow-xl"
           >
-            <GraduationCap className="h-12 w-12 text-yellow-400" />
+            <img src="https://miva-university.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/05/22174501/Miva-Logo-White-Horizontal-1.png" alt="Miva Open University" className="h-16 object-contain px-2" />
           </motion.div>
 
           <motion.h1 

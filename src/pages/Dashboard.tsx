@@ -93,28 +93,28 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-        <div className="flex items-center gap-6">
+      <div className="flex flex-col md:flex-row justify-between items-center md:items-start bg-white p-6 rounded-2xl shadow-sm border border-slate-100 gap-6">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 sm:gap-6">
           <img 
             src={profile.passportBase64} 
             alt={profile.fullName} 
-            className="w-24 h-24 rounded-full object-cover shadow-sm border-2 border-white ring-2 ring-slate-100"
+            className="w-24 h-24 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-cover shadow-sm border-2 border-white ring-2 ring-slate-100"
           />
           <div>
             <h1 className="text-2xl font-bold text-slate-900">Welcome, {profile.fullName}</h1>
             <p className="text-slate-500">{profile.programme} • Class of {profile.graduationYear}</p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row w-full md:w-auto items-stretch sm:items-center gap-3">
           <button 
             onClick={() => setIsEditModalOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-slate-100 text-slate-700 rounded-xl font-medium hover:bg-slate-200 transition"
+            className="flex items-center justify-center w-full sm:w-auto gap-2 px-6 py-3 bg-slate-100 text-slate-700 rounded-xl font-medium hover:bg-slate-200 transition"
           >
             <Edit className="w-4 h-4" /> Edit Profile
           </button>
           <Link 
             to={`/profile/${user?.uid}`}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
+            className="flex items-center justify-center w-full sm:w-auto gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition"
           >
             View Public Profile <ExternalLink className="w-4 h-4" />
           </Link>

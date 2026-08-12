@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useAuth } from '../contexts/AuthContext';
-import { GraduationCap, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email('Valid email is required'),
@@ -40,10 +40,8 @@ export default function Login() {
   return (
     <div className="min-h-[70vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <div className="bg-blue-600 p-3 rounded-2xl shadow-lg">
-            <GraduationCap className="h-10 w-10 text-yellow-400" />
-          </div>
+        <div className="flex justify-center mb-4">
+          <img src="https://miva-university.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/05/22180831/Miva-Logo-Blue-Horizontal-1.png" alt="Miva Open University" className="h-16 object-contain" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900">
           Welcome Back
