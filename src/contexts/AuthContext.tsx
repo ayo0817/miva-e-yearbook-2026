@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { User, onAuthStateChanged, signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth, db } from '../lib/firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { UserProfile } from '../types';
 
 interface AuthContextType {
@@ -12,6 +12,7 @@ interface AuthContextType {
   register: (email: string, password: string, profileData: Omit<UserProfile, 'userId' | 'email'>) => Promise<void>;
   logout: () => Promise<void>;
   refreshProfile: () => Promise<void>;
+  deleteAccount: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -22,6 +23,7 @@ const AuthContext = createContext<AuthContextType>({
   register: async () => {},
   logout: async () => {},
   refreshProfile: async () => {},
+  deleteAccount: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -93,8 +95,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await signOut(auth);
   };
 
+  const deleteAccount = async () => {
+    if (!user) return;
+    const uid = user.uid;
+    await deleteDoc(doc(db, 'users', uid));
+    await deleteDoc(doc(db, 'userImages', uid));
+    await deleteUser(user);
+    setUser(null);
+    setProfile(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, profile, loading, login, register, logout, refreshProfile }}>
+    <AuthContext.Provider value={{ user, profile, loading, login, register, logout, refreshProfile, deleteAccount }}>
       {children}
     </AuthContext.Provider>
   );

@@ -18,7 +18,7 @@ service cloud.firestore {
       allow read: if true;
       allow create: if isAuthenticated() && isOwner(userId);
       allow update: if isAuthenticated() && (isOwner(userId) || isAdmin());
-      allow delete: if isAdmin();
+      allow delete: if isAuthenticated() && (isOwner(userId) || isAdmin());
     }
     
     match /userImages/{userId} {

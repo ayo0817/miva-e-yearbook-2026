@@ -29,11 +29,32 @@ const profileSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileSchema>;
 
 export default function EditProfileModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const { user, profile, refreshProfile } = useAuth();
+  const { user, profile, refreshProfile, deleteAccount } = useAuth();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   
   // Image crop state
+  
+  const handleDeleteAccount = async () => {
+    setIsDeleting(true);
+    try {
+      await deleteAccount();
+      onClose();
+    } catch (err: any) {
+      console.error(err);
+      if (err.code === 'auth/requires-recent-login') {
+        setError("Please log out and log back in to delete your account.");
+      } else {
+        setError("Failed to delete account. Please try again.");
+      }
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
+
   const [imgSrc, setImgSrc] = useState('');
   const [crop, setCrop] = useState<Crop>();
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
@@ -334,8 +355,47 @@ export default function EditProfileModal({ isOpen, onClose }: { isOpen: boolean;
                   profile ? 'Save Changes' : 'Create Profile'
                 )}
               </button>
+
             </div>
+            {profile && (
+              <div className="pt-6 mt-6 border-t border-red-100">
+                <h3 className="text-lg font-semibold text-red-600 mb-2">Danger Zone</h3>
+                <p className="text-sm text-slate-500 mb-4">Deleting your profile is permanent and cannot be undone. All your data will be erased.</p>
+                {showDeleteConfirm ? (
+                  <div className="bg-red-50 border border-red-200 p-4 rounded-xl">
+                    <p className="text-red-700 font-medium mb-4">Are you absolutely sure you want to delete your account? This cannot be undone.</p>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={handleDeleteAccount}
+                        disabled={isDeleting}
+                        className="flex-1 py-3 px-4 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-all disabled:opacity-50"
+                      >
+                        {isDeleting ? 'Deleting...' : 'Yes, Delete'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShowDeleteConfirm(false)}
+                        disabled={isDeleting}
+                        className="flex-1 py-3 px-4 bg-white border border-slate-300 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition-all disabled:opacity-50"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setShowDeleteConfirm(true)}
+                    className="w-full py-4 px-8 border border-red-500 text-red-600 rounded-xl shadow-sm text-lg font-medium hover:bg-red-50 transition-all"
+                  >
+                    Delete Profile
+                  </button>
+                )}
+              </div>
+            )}
           </form>
+
         </div>
       </div>
     </div>
